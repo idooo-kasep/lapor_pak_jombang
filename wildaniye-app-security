@@ -1,0 +1,19 @@
+it]
+Description=Gunicorn Wildaniye Security App
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/wildaniye-app-security
+Environment="PATH=/opt/wildaniye-app-security/venv/bin"
+ExecStart=/opt/wildaniye-app-security/venv/bin/gunicorn \
+          -w 3 \
+          --bind unix:/opt/wildaniye-app-security/wildaniye-security.sock \
+          app:app
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
